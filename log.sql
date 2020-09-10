@@ -11,5 +11,6 @@ create table domicilio(
 	estado    varchar(50),
 	municipio varchar(50),
 	col       varchar(50),
-	no        int(5));
+	no        int(5)
+	FOREIGN KEY (id_dom)REFERENCES usuario(id_usu));
 
