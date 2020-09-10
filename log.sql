@@ -8,9 +8,10 @@ create table usuario(
 
 create table domicilio(
 	id_dom    int(5)NOT NULL PRIMARY KEY AUTO INCREMENT,
+	id_usu int(5)AUTO INCREMENT,
 	estado    varchar(50),
 	municipio varchar(50),
 	col       varchar(50),
 	no        int(5)
-	FOREIGN KEY (id_dom)REFERENCES usuario(id_usu));
+	FOREIGN KEY (id_usu)REFERENCES usuario(id_usu));
 
