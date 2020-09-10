@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.usuarios.entity.Mensaje;
 import com.demo.usuarios.entity.Usuario;
 import com.demo.usuarios.service.UsuarioService;
 
@@ -37,6 +38,21 @@ public class UsuarioController {
 		}else {
 			return ResponseEntity.ok(u);
 		}
+	}
+	
+	@PostMapping("usuario/verificar")
+	public ResponseEntity<Mensaje> verificarUsuario(@RequestBody Usuario usuario){
+		List<Usuario> usuarios = service.mostarTodos();
+		for(Usuario u: usuarios) {
+			if(u.getNombre().equals(usuario.getNombre())) {
+				if(u.getContra().equals(usuario.getContra())) {
+					Mensaje m = new Mensaje(true, "Inicio de sesion exitoso");
+					return ResponseEntity.ok(m);
+				}
+			}
+		}
+		Mensaje m = new Mensaje(false, "Error al iniciar sesion");
+		return ResponseEntity.ok(m);
 	}
 
 	@DeleteMapping("/usuario/{id}")
