@@ -1,22 +1,17 @@
-getBreeds();
-// Made to demonstrate how to use JQuery and TheDogAPI to load breed list, and show a breed image and data on selection. Any questions hit me up at - https://forum.thatapiguy.com - Aden
-
-// Setup the Controls
-/*var $breed_select = $('select.breed_select');
-$breed_select.change(function() {
-  var id = $(this).children(":selected").attr("id");
-  getDogByBreed(id)
-});*/
-
-// Load all the Breeds
 function getBreeds() {
   ajax_get('https://api.thedogapi.com/v1/breeds', function(data) {
-    //populateBreedsSelect(data)
-            //for (var i = 0; i < data.length; i++) {
-                getDogByBreed(1);   
-                //getDogByBreed(2);                
-           // }                   
-          console.log(data);
+        var search_str= document.getElementById("breed_search").value;
+        console.log(search_str);
+
+            for (var i = 0; i < data.length; i++) {                                
+                if(data[i].name==search_str){
+                    //console.log(data[i].name);
+                    console.log(search_str);
+                    getDogByBreed(data[i].id);
+                }                                 
+           }                   
+          
+
     
   });
 }
