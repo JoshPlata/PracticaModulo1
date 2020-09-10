@@ -15,9 +15,8 @@ function getBreeds() {
             //for (var i = 0; i < data.length; i++) {
                 getDogByBreed(1);   
                 //getDogByBreed(2);                
-           // }        
-           
-   //        console.log(data[0].attr("id"));
+           // }                   
+          console.log(data);
     
   });
 }
