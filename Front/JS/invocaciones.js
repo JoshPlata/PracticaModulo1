@@ -1,21 +1,29 @@
+getBreeds();
 // Made to demonstrate how to use JQuery and TheDogAPI to load breed list, and show a breed image and data on selection. Any questions hit me up at - https://forum.thatapiguy.com - Aden
 
 // Setup the Controls
-var $breed_select = $('select.breed_select');
+/*var $breed_select = $('select.breed_select');
 $breed_select.change(function() {
   var id = $(this).children(":selected").attr("id");
   getDogByBreed(id)
-});
+});*/
 
 // Load all the Breeds
 function getBreeds() {
   ajax_get('https://api.thedogapi.com/v1/breeds', function(data) {
-    populateBreedsSelect(data)
+    //populateBreedsSelect(data)
+            //for (var i = 0; i < data.length; i++) {
+                getDogByBreed(1);   
+                //getDogByBreed(2);                
+           // }        
+           
+   //        console.log(data[0].attr("id"));
+    
   });
 }
 
 // Put the breeds in the Select control
-function populateBreedsSelect(breeds) {
+/*function populateBreedsSelect(breeds) {
   $breed_select.empty().append(function() {
     var output = '';
     $.each(breeds, function(key, value) {
@@ -23,10 +31,13 @@ function populateBreedsSelect(breeds) {
     });
     return output;
   });
-}
+}*/
+
+
 // triggered when the breed select control changes
 function getDogByBreed(breed_id) {
-  // search for images that contain the breed (breed_id=) and attach the breed object (include_breed=1)
+  
+    // search for images that contain the breed (breed_id=) and attach the breed object (include_breed=1)
   ajax_get('https://api.thedogapi.com/v1/images/search?include_breed=1&breed_id=' + breed_id, function(data) {
 
     if (data.length == 0) {
@@ -44,6 +55,7 @@ function clearBreed() {
   $('#breed_image').attr('src', "");
   $("#breed_data_table tr").remove();
 }
+
 // display the breed image and data
 function displayBreed(image) {
   $('#breed_image').attr('src', image.url);
@@ -63,7 +75,7 @@ function ajax_get(url, callback) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log('responseText:' + xmlhttp.responseText);
+     // console.log('responseText:' + xmlhttp.responseText);
       try {
         var data = JSON.parse(xmlhttp.responseText);
       } catch (err) {
@@ -78,4 +90,3 @@ function ajax_get(url, callback) {
   xmlhttp.send();
 }
 // call the getBreeds function which will load all the Dog breeds into the select control
-getBreeds();
